@@ -10,6 +10,7 @@
 
 
 
+    use App\Repository\ProductRepository;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -20,12 +21,17 @@
         /**
          * @Route("/", name="default")
          */
-        public function index() {
-            $massage = 'I\' m index metod!';
+        public function index(ProductRepository $productRepository)
+        {
+            $products = $productRepository->findby(
+                ['isTop'=>true],
+                ['name' => 'ASC']
+            );
 
-            return $this->render('default/index.html.twig',
+            return $this->render(
+                'default/index.html.twig',
             [
-                'mess' => $massage,
+                'products' => $products,
                 ]
             );
         }
