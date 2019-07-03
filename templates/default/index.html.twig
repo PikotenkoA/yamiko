@@ -5,50 +5,18 @@
 
 {% block body %}
     <div class="card-deck mb-3 text-center">
+
+        {% for product in products %}
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Сарафан</h4>
+                <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">750</h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>10 users included</li>
-                    <li>2 GB of storage</li>
-                    <li>Email support</li>
-                    <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить сейчас</button>
+                <h1 class="card-title pricing-card-title">{{ product.price/100 }} грн.</h1>
+                {{ product.description }}
+                <a href="{{ path('product', {'id':product.id}) }}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
             </div>
         </div>
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Рубашка</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">750</h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>100% cotton</li>
-                    <li>bla bla bla</li>
-                    <li><a href="https://www.instagram.com/p/BzQ2E_fogo-/"><img src="1.jpg"></a></li>
-                    <li>Help center access</li>
-                </ul>
-                <button type="button" claKss="btn btn-lg btn-block btn-primary">Купить сейчас</button>
-            </div>
-        </div>
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Юбка</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">750</h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>30 users included</li>
-                    <li>15 GB of storage</li>
-                    <li>Phone and email support</li>
-                    <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">Купить сейчас</button>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock%}
