@@ -88,7 +88,7 @@ class Product
         return $this;
     }
 
-    public function getIsTop(): ?bool
+    public function getIsTop(): bool
     {
         return $this->isTop;
     }

@@ -17,8 +17,14 @@
             <a class="p-2 text-dark" href="{{ path('contact') }}">Контакты</a>
             <a class="p-2 text-dark" href="#">Pricing</a>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Sign up</a>
-    </div>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a class="mr-md-3">{{ app.user.firstName }} {{ app.user.lastName }}</a>
+            <a class="btn btn-outline-primary" href="{{ path('security_logout') }}">Выход</a>
+        {% else %}
+            <a class="btn btn-outline-primary" href="{{ path('security_login') }}">Вход</a>
+        {% endif %}
+            </div>
 
     {#<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">#}
         {#<h1 class="display-4">Pricing</h1>#}
