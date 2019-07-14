@@ -1,0 +1,5 @@
+<h1>Регистрация на сайте</h1>
+<p>Уважаемый(ая) {{ user.fullName }}, для подверждения регистрации
+    кликните <a href="{{ path('security_confirm_email',
+        {'emailCheckCode': user.emailCheckCode}) }}">сюда</a>
+</p>
