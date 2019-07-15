@@ -4,19 +4,5 @@
 {% block title %} YaMiKo {% endblock %}
 
 {% block body %}
-    <div class="card-deck mb-3 text-center">
-
-        {% for product in products %}
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">{{ product.price/100 }} грн.</h1>
-                {{ product.description }}
-                <a href="{{ path('product', {'id':product.id}) }}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    {{ include('product/_list.html.twig',{'products': products}) }}
 {% endblock%}

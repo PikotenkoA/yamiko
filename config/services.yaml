@@ -38,3 +38,9 @@ services:
         arguments: [~, App\Entity\Product, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Товары }
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~, '@security.user_password_encoder.generic']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Пользователи }
