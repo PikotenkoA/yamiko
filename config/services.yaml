@@ -39,6 +39,13 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Товары }
 
+
+    admin.product_image:
+        class: App\Admin\ProductImageAdmin
+        arguments: [~, App\Entity\ProductImage, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+
     admin.user:
         class: App\Admin\UserAdmin
         arguments: [~, App\Entity\User, ~, '@security.user_password_encoder.generic']
