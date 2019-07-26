@@ -5,8 +5,10 @@
 {% block body %}
     <h1>{{ product.name }}</h1>
     
-    {% for image in product.images %}
-        <img src="{{ vich_uploader_asset(image, 'image') | imagine_filter('product_deteil') }}">
+    {% for image in product.images.empty %}
+        <img src="{{ vich_uploader_asset(image, 'image') | imagine_filter('product_deteil') }}"
+             alt="{{ product.name }}">
+    {% endfor %}
     <p>{{ product.price/100 }}</p>
     <p>{{ product.description }}</p>
 {% endblock %}
