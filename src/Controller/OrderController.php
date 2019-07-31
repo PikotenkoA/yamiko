@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Service\OrderService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -15,9 +16,12 @@ class OrderController extends AbstractController
     /**
      * @Route("/add-to-cart/{id}", name="order_add_to_cart")
      */
-    public function addToCart(Product $product, OrderService $orderService)
+    public function addToCart(Product $product, OrderService $orderService, Request $request)
     {
         $orderService->add($product, 1);
+        if ($request->isXmlHttpRequest()){
+            return $this->headerCart($orderService);
+        }
 
         return $this->redirectToRoute('default');
     }
@@ -30,4 +34,15 @@ class OrderController extends AbstractController
             'order' => $order,
         ]);
     }
+
+    /**
+     * @Route("/cart}", name="order_cart")
+     */
+    public function cart(OrderService $orderService)
+    {
+        $order = $orderService->getOrder();
+
+        return $this->render('order/cart.html.twig', [
+            'order' => $order,
+        ]);    }
 }

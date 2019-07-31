@@ -14,8 +14,9 @@
                 <h1 class="card-title pricing-card-title">{{ product.price/100 }} грн.</h1>
                 {{ product.description }}
                 <a href="{{ path('product', {'id':product.id}) }}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
-                <a href="{{ path('order_add_to_cart', {'id':product.id}) }}" class="btn btn-lg btn-block btn-outline-primary">
-                    <i class="fas fa-cart-plus"></i>
+                <a href="{{ path('order_add_to_cart', {'id':product.id}) }}"
+                   class="btn btn-lg btn-block btn-outline-primary js-add-to-cart">
+                    <i class="fas fa-cart-plus"></i>В корзину
                 </a>
 
             </div>
