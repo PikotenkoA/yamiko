@@ -91,4 +91,12 @@ class OrderService
 
         $this->sessions->set(self::SESSION_KEY, $order->getId());
     }
+
+    public function deleteItem(OrderItem $item, OrderService $orderService)
+    {
+        $order = $);
+        $order->removeItem($item);
+        $this ->entityManager->remove($item);
+        $this->save($order);
+        }
 }

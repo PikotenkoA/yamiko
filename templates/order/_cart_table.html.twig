@@ -1,0 +1,36 @@
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+        </tr>
+
+        {% for item in order.items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price/100 }}</td>
+                <td>
+                    <input type="number" value="{{ item.count }}"
+                    data-url="{{ path('order_set_count', {'id': item.id }) }}"
+                    class="js-cart-item-count"
+                    >
+                </td>
+                <td>{{ item.amount/100 }}</td>
+                <td><a href="{{ path('order_delete_item', {'id': item.id}) }}" class="js-cart-remove-item">
+                        <li class="fas fa-trash-alt"></li>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <th colspan="3">Всего</th>
+            <th>{{ order.amount/100 }}</th>
+        </tr>
+    </table>
+
+
+
