@@ -50,7 +50,7 @@ if (cartTable){
     });
 
     cartTable.addEventListener('click', (event) => {
-        let link = event.target.closert('.js-cart-remove-item');
+        let link = event.target.closest('.js-cart-remove-item');
 
         if (!link) {
             return;
