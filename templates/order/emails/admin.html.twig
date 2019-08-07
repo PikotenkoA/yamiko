@@ -1,0 +1,31 @@
+<h1>Новый заказ на сайте{{ order.id }}</h1>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+
+    {% for item in order.items %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price/100 }}</td>
+            <td>{{ item.count}}</td>
+            <td>{{ item.amount/100 }}</td>
+        </tr>
+    {% endfor %}
+
+    <tr>
+        <th colspan="3">Всего</th>
+        <th>{{ order.amount/100 }}</th>
+    </tr>
+</table>
+
+<p>Имя:{{ order.firstName }}</p>
+<p>Фамилия:{{ order.lastName }}</p>
+<p>Email:{{ order.email }}</p>
+<p>Адрес:{{ order.address }}</p>

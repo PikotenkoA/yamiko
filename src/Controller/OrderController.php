@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\OrderItem;
 use App\Entity\Product;
+use App\Form\OrderType;
 use App\Service\OrderService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,8 @@ class OrderController extends AbstractController
      */
     public function addToCart(Product $product, OrderService $orderService, Request $request)
     {
-        $orderService->add($product, 1);
+        $orderService->add($product, 1, $this->getUser());
+
         if ($request->isXmlHttpRequest()) {
             return $this->headerCart($orderService);
         }
@@ -58,7 +60,7 @@ class OrderController extends AbstractController
 
         if ($count > 0 && $item->getCart() === $order) {
             $item->setCount($count);
-            $orderService->save($item->getCart());
+            $orderService->save($item->getCart(), $this->getUser());
         }
 
         return $this->render('order/_cart_table.html.twig', [
@@ -80,5 +82,35 @@ class OrderController extends AbstractController
         return $this->render('order/_cart_table.html.twig',
         ['order' => $order,
         ]);
+    }
+
+    /**
+     * @Route("/cart/order", name="order_make_order")
+     */
+    public function makeOrder(OrderService $orderService, Request $request)
+    {
+        $order = $orderService->getOrder();
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $orderService->makeOrder($order);
+
+            return $this->redirectToRoute('order_success');
+        }
+
+        return $this->render('order/make_order.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/order/success", name="order_success")
+     */
+    public function orderSuccess()
+    {
+        return $this->render('order/success.html.twig');
     }
 }

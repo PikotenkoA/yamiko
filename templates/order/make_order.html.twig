@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block body %}
+    <h1>Оформление заказа</h1>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+
+    {% for item in order.items %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price/100 }}</td>
+            <td>{{ item.count}}</td>
+            <td>{{ item.amount/100 }}</td>
+            </tr>
+    {% endfor %}
+
+    <tr>
+        <th colspan="3">Всего</th>
+        <th>{{ order.amount/100 }}</th>
+    </tr>
+</table>
+
+    {{ form_start(form) }}
+    {{ form_row(form.firstName, {'label': 'Имя'}) }}
+    {{ form_row(form.lastName, {'label': 'Фамилия'}) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.address, {'label': 'Адрес'}) }}
+    <button type="submit" class="bt">Оформить</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+
+

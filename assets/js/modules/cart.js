@@ -1,6 +1,6 @@
 'use strict';
 
-let addToCartButtons, cartItemCountInputs;
+let addToCartButtons, cartTable;
 
 addToCartButtons = document.querySelectorAll('.js-add-to-cart');
 
@@ -23,8 +23,8 @@ addToCartButtons.forEach((button)=>{
 
 });
 
-cartTable = document.getElementById('cartTablre');
-cartItemCountInputs = document.querySelectorAll('.js-cart-item-count');
+cartTable = document.getElementById('cartTable');
+
 
 if (cartTable){
     cartTable.addEventListener('input', (event) => {
