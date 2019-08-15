@@ -45,6 +45,7 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/register/success", name="security_register_success")
      */
@@ -52,6 +53,7 @@ class SecurityController extends AbstractController
     {
         return $this->render('security/register_success.html.twig');
     }
+
     /**
      * @Route("/register/confirm/{emailCheckCode}", name="security_confirm_email")
      */
