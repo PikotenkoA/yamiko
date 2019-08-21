@@ -15,6 +15,7 @@ class CategoryAdmin extends AbstractAdmin
     {
        $list
            ->addIdentifier('id')
+           ->addIdentifier('parent')
            ->addIdentifier('name')
        ;
 
@@ -24,6 +25,7 @@ class CategoryAdmin extends AbstractAdmin
     {
         $filter
             ->add('id')
+            ->add('parent')
             ->add('name')
         ;
     }
@@ -32,6 +34,7 @@ class CategoryAdmin extends AbstractAdmin
     {
         $form
 
+            ->add('parent')
             ->add('name')
         ;
     }

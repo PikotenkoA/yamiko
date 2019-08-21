@@ -1,6 +1,17 @@
 {% for category in categories %}
-
-    <a class="dropdown-item" href="{{ path('category_show', {'id': category.id}) }}">{{ category.name }}</a>
-
+    <li>
+        {% if category.subcategories|length == 0 %}
+        <a class="dropdown-item" href="{{ path('category_show', {'id': category.id}) }}">
+            {{ category.name }}
+            </a>
+        {% else %}
+            <a class="dropdown-item dropdown-toggle" href="{{ path('category_show', {'id': category.id}) }}">
+                {{ category.name }}
+            </a>
+            <ul class="dropdown-menu">
+                {{ include('category/_header_list.html.twig', {'categories': category.subcategories}) }}
+            </ul>
+            {% endif %}
+    </li>
 {% endfor %}
 

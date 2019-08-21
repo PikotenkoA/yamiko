@@ -13,5 +13,6 @@ require('@fortawesome/fontawesome-free/js/all');
 // const $ = require('jquery');
 
 require('./modules/cart');
+require('./modules/menu');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
