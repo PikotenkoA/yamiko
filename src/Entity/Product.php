@@ -55,11 +55,23 @@ class Product
      */
     private $orderItems;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AttributeValue", mappedBy="attribute")
+     */
+    private $product;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AttributeValue", mappedBy="product")
+     */
+    private $value;
+
     public function __construct()
     {
         $this->isTop=false;
         $this->images = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
+        $this->product = new ArrayCollection();
+        $this->value = new ArrayCollection();
     }
 
     public function __toString()
@@ -188,6 +200,68 @@ class Product
             // set the owning side to null (unless already changed)
             if ($orderItem->getProduct() === $this) {
                 $orderItem->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AttributeValue[]
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function addProduct(AttributeValue $product): self
+    {
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
+            $product->setAttribute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(AttributeValue $product): self
+    {
+        if ($this->product->contains($product)) {
+            $this->product->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getAttribute() === $this) {
+                $product->setAttribute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AttributeValue[]
+     */
+    public function getValue(): Collection
+    {
+        return $this->value;
+    }
+
+    public function addValue(AttributeValue $value): self
+    {
+        if (!$this->value->contains($value)) {
+            $this->value[] = $value;
+            $value->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValue(AttributeValue $value): self
+    {
+        if ($this->value->contains($value)) {
+            $this->value->removeElement($value);
+            // set the owning side to null (unless already changed)
+            if ($value->getProduct() === $this) {
+                $value->setProduct(null);
             }
         }
 

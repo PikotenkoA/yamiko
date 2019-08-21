@@ -64,3 +64,15 @@ services:
         arguments: [~, App\Entity\OrderItem, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+
+    admin.attribute:
+         class: App\Admin\AttributeAdmin
+         arguments: [~, App\Entity\Attribute, ~]
+         tags:
+             - { name: sonata.admin, manager_type: orm, label: Атрибуты }
+
+    admin.attribute_value:
+        class: App\Admin\AttributeValueAdmin
+        arguments: [~, App\Entity\AttributeValue, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
