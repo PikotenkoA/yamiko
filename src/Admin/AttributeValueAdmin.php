@@ -5,6 +5,7 @@ namespace App\Admin;
 
 
 use App\Entity\Attribute;
+use App\Repository\AttributeRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
@@ -21,14 +22,21 @@ class AttributeValueAdmin extends AbstractAdmin
 
 
         $form
-            ->add('attribute')
+            ->add('attribute', null, [
+                'attr'=> [
+                    'class' => 'js-product-attribute',
+                ]
+            ])
             ->add('value', ChoiceType::class, [
                 'choices' => $choices,
                 'choice_attr' =>function ($choice, $key, $value) use ($attributeValuesWithAttributes){
                 return [
                     'data-attribute-id' => $attributeValuesWithAttributes[$value],
                 ];
-                }
+                },
+                'attr' => [
+                    'class' => 'js-product-attribute-value',
+                ]
             ])
         ;
 
@@ -47,7 +55,7 @@ class AttributeValueAdmin extends AbstractAdmin
 
         foreach ($attributes as $attribute){
             foreach ($attribute->getValuesList() as $value){
-                $values[$value] = $attribute->getId;
+                $values[$value] = $attribute->getId();
             }
         }
 

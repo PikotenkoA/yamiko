@@ -55,15 +55,13 @@ class Product
      */
     private $orderItems;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AttributeValue", mappedBy="attribute")
-     */
-    private $product;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AttributeValue", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\AttributeValue",
+     *  mappedBy="product", orphanRemoval=true, cascade={"persist"})
      */
-    private $value;
+    private $attributeValues
+    ;
 
     public function __construct()
     {
@@ -72,6 +70,7 @@ class Product
         $this->orderItems = new ArrayCollection();
         $this->product = new ArrayCollection();
         $this->value = new ArrayCollection();
+        $this->attributeValues = new ArrayCollection();
     }
 
     public function __toString()
@@ -262,6 +261,37 @@ class Product
             // set the owning side to null (unless already changed)
             if ($value->getProduct() === $this) {
                 $value->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AttributeValue[]
+     */
+    public function getAttributeValues(): Collection
+    {
+        return $this->attributeValues;
+    }
+
+    public function addAttributeValue(AttributeValue $attributeValue): self
+    {
+        if (!$this->attributeValues->contains($attributeValue)) {
+            $this->attributeValues[] = $attributeValue;
+            $attributeValue->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttributeValue(AttributeValue $attributeValue): self
+    {
+        if ($this->attributeValues->contains($attributeValue)) {
+            $this->attributeValues->removeElement($attributeValue);
+            // set the owning side to null (unless already changed)
+            if ($attributeValue->getProduct() === $this) {
+                $attributeValue->setProduct(null);
             }
         }
 

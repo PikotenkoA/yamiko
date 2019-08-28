@@ -3,8 +3,6 @@
 
 namespace App\Admin;
 
-
-use phpDocumentor\Reflection\Types\Callable_;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
