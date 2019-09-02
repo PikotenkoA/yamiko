@@ -17,7 +17,7 @@ class ProductAdmin extends AbstractAdmin
        $list
            ->addIdentifier('id')
            ->addIdentifier('name')
-           ->add('category')
+           ->add('categories')
            ->addIdentifier('price')
            ->addIdentifier('description')
            ->add('isTop')
@@ -30,7 +30,7 @@ class ProductAdmin extends AbstractAdmin
         $filter
             ->add('id')
             ->add('name')
-            ->add('category')
+            ->add('categories')
             ->add('price')
             ->add('description')
             ->add('isTop')
@@ -43,7 +43,7 @@ class ProductAdmin extends AbstractAdmin
             
             ->add('name')
             ->add('price')
-            ->add('category')
+            ->add('categories')
             ->add('description')
             ->add('isTop')
             ->add(
