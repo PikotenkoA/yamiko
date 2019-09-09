@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,32 +20,37 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Category $category
+     * @param array $filter['attr1913' => ['1.1'], 'attr23' => ['5']]
+     *
+     * @return Product[]
+     */
+    public function findByFilter(Category $category, array $filter)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBilder = $this->createQueryBuilder('p');
+        $queryBilder
+            ->join('p.categories', 'c')
+            ->andWhere('c.id = :category')
+            ->setParameter('category', $category);
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        foreach ($filter as $key => $values) {
+            if(!$values){
+                continue;
+            }
+        $attributeId =substr($key, 4);
+
+        $queryBilder
+            ->join('p.attributeValues', $key)
+            ->andWhere('IDENTITY('. $key . '.attribute) = :' .$key)
+            ->setParameter($key, $attributeId)
+            ->andWhere($queryBilder->expr()->in($key . '.value', $values));
+
+        }
+
+        return $queryBilder->getQuery()->execute();
     }
-    */
+
+
+
 }

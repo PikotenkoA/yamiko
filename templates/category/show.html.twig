@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}{{ category.name }} {% endblock %}
 
 {% block body %}
-    <h1>{{ category.name}}</h1>
-    {{ include('product/_list.html.twig',{'products': category.products}) }}
 
+    <h1>{{ category.name}}</h1>
+    <div class="row">
+        <div class="col-sm-2 filter">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class= "btn btn-primary">Найти</button>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-sm-10">
+            {{ include('product/_list.html.twig',{'products': category.products}) }}
+        </div>
+
+    </div>
 {% endblock %}
 

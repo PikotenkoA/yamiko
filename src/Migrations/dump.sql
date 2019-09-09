@@ -1,6 +1,6 @@
-UPDATE yamiko.category SET name = 'Брюки' WHERE id = 1;
-UPDATE yamiko.category SET name = 'Рубашки' WHERE id = 2;
-UPDATE yamiko.category SET name = 'Сарафаны' WHERE id = 3;
+UPDATE yamiko.categories SET name = 'Брюки' WHERE id = 1;
+UPDATE yamiko.categories SET name = 'Рубашки' WHERE id = 2;
+UPDATE yamiko.categories SET name = 'Сарафаны' WHERE id = 3;
 UPDATE yamiko.products SET name = 'Брюки', price = 80000, description = 'Супер качество', is_top = 1, category_id = 1 WHERE id = 1;
 UPDATE yamiko.products SET name = 'Рубашка', price = 75000, description = 'Супер качество', is_top = 0, category_id = 2 WHERE id = 2;
 UPDATE yamiko.products SET name = 'Сарафан', price = 85000, description = 'Супер качество', is_top = 1, category_id = 3 WHERE id = 3;
