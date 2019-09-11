@@ -69,6 +69,11 @@ class Order
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $paidAt;
+
     public function __construct()
     {
         $this->amount = 0;
@@ -224,6 +229,18 @@ class Order
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPaidAt(): ?\DateTimeInterface
+    {
+        return $this->paidAt;
+    }
+
+    public function setPaidAt(?\DateTimeInterface $paidAt): self
+    {
+        $this->paidAt = $paidAt;
 
         return $this;
     }

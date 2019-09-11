@@ -31,7 +31,8 @@
         "symfony/web-link": "4.3.*",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "4.3.*",
-        "vich/uploader-bundle": "^1.10"
+        "vich/uploader-bundle": "^1.10",
+        "wayforpay/php-sdk": "^1.0"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <h1>Ошибка выполнения оплаты</h1>
+        <p>{{ error }}</p>
+        <p><a href="{{ path('order_success', {'id': order.id}) }}">Попробывать еще раз</a> </p>
+    {% else %}
+        <h1>Ваш заказ успешно оплачен.</h1>
+    {% endif %}
+
+    <p><a href="{{ path('default') }}">Продолжить покупки.</a> </p>
+{% endblock %}

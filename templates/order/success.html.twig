@@ -6,6 +6,7 @@
 
 {% block body %}
 <h1>Ваш заказ принят. Мы с Вами свяжемся.</h1>
+    <div class="payment-form">{{ form|raw }}</div>
     <p><a href="{{ path('default') }}"> Продолжить покупки</a></p>
 {% endblock %}
 

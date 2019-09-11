@@ -1,4 +1,7 @@
 {
+    "anlutro/curl": {
+        "version": "1.4.7"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
     },
@@ -95,6 +98,12 @@
         "files": [
             "config/packages/dev/easy_log_handler.yaml"
         ]
+    },
+    "easyframework/collections": {
+        "version": "v3.2.0"
+    },
+    "easyframework/generics": {
+        "version": "v2.1.1"
     },
     "egulias/email-validator": {
         "version": "2.1.8"
@@ -636,6 +645,9 @@
         "files": [
             "config/packages/vich_uploader.yaml"
         ]
+    },
+    "wayforpay/php-sdk": {
+        "version": "v1.0.6"
     },
     "webmozart/assert": {
         "version": "1.4.0"
